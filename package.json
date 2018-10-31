@@ -35,6 +35,10 @@
     "moment": "^2.23.0",
     "ngx-bootstrap": "next",
     "ngx-cookie": "^4.0.2",
+<<<<<<< HEAD
+=======
+    "ngx-file-uploader-ampath": "0.0.10",
+>>>>>>> Update file uploader
     "reflect-metadata": "^0.1.9",
     "rxjs": "^6.3.3",
     "rxjs-compat": "^6.2.1",
