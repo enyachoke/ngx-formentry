@@ -5,7 +5,7 @@ import 'hammerjs';
 import { DEFAULT_STYLES } from './form-renderer.component.css';
 import { DOCUMENT } from '@angular/common';
 import { DataSources } from '../data-sources/data-sources';
-import { NodeBase, LeafNode } from '../form-factory/form-node';
+import { NodeBase, LeafNode, GroupNode } from '../form-factory/form-node';
 import { AfeFormGroup } from '../../abstract-controls-extension/afe-form-group';
 import { ValidationFactory } from '../form-factory/validation.factory';
 import { DataSource } from '../question-models/interfaces/data-source';
@@ -92,28 +92,21 @@ export class FormRendererComponent implements OnInit {
 
   }
 
-  checkSection(node:NodeBase) {
-    if(node.question.renderingType === 'section'){
-      let allSectionControlsHidden = Object.keys(node.children).every((k) => node.children[k].control.hidden);
+  checkSection(node: NodeBase) {
+    if (node.question.renderingType === 'section') {
+      let groupChildrenHidden = false;
+      let allSectionControlsHidden = Object.keys(node.children).every((k) => {
+        let innerNode = node.children[k];
+        if (innerNode instanceof GroupNode) {
+          groupChildrenHidden = Object.keys(innerNode.children).every((i) => innerNode.children[i].control.hidden)
+        }
+        return node.children[k].control.hidden || groupChildrenHidden;
+      });
       return !allSectionControlsHidden;
     }
     return true;
   }
- 
-  checkPage(node:NodeBase) {
-    if(node.question){
-      console.log('Page',node.children);
-      //let allSectionControlsHidden = Object.keys(node.children).every((k) => node.children[k].control.hidden);
 
-      Object.keys(node.children).every((k) => {
-        console.log(k);
-        return node.children[k].control.hidden
-      });
-
-      // return !allSectionControlsHidden;
-    }
-    return true;
-  }
   public clickTab(tabNumber) {
     this.activeTab = tabNumber;
   }
