@@ -82,7 +82,9 @@ export class FormRendererComponent implements OnInit {
       this.dataSource = this.dataSources.dataSources[this.node.question.dataSource];
       let defaltValues = of([]);
       if (this.dataSource.resolveSelectedValue(selectQuestion.control.value)) {
-        defaltValues = this.dataSource.resolveSelectedValue(selectQuestion.control.value);
+        defaltValues = this.dataSource.resolveSelectedValue(selectQuestion.control.value).pipe(
+          catchError(() => of([])), // empty list on error
+        );
       }
 
       this.locations$ = concat(
