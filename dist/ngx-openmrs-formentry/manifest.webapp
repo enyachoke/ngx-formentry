@@ -1,0 +1,19 @@
+{
+  "version": "0.1.0",
+  "name": "FormentryOwa",
+  "description": "Form",
+  "launch_path": "index.html",
+  "icons": {
+    "48": "icons8-form-50.png"
+  },
+  "developer": {
+    "name": "achachiez",
+    "url": "https://github.com/achachiez/openmrs-owa-formentryowa"
+  },
+  "default_locale": "en",
+    "activities": {
+      "openmrs": {
+        "href": "*"
+      }
+    }
+}
